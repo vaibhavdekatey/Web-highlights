@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Highlights</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Web Highlights</h1>
+    </header>
+
+    <div id="api-section">
+      <div id="api-input-container">
+        <input
+          type="password"
+          id="api-key-input"
+          placeholder="Paste Google Gemini API Key"
+        />
+        <button id="save-key-btn">Set Key</button>
+      </div>
+
+      <!-- Saved State -->
+      <div id="api-saved-container">
+        <span style="color: #166534; font-weight: 600"
+          >✅ Gemini Key Active</span
+        >
+        <button id="delete-key-btn">Remove Key</button>
+      </div>
+    </div>
+
+    <div id="list-container"></div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
