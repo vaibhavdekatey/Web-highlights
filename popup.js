@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (key) {
       chrome.storage.local.set({ gemini_key: key }, () => {
-        checkApiKeyStatus(); // Refresh UI state
+        checkApiKeyStatus();
       });
     }
   });
@@ -17,13 +17,12 @@ document.addEventListener("DOMContentLoaded", () => {
   // Handle API Key deletion
   document.getElementById("delete-key-btn").addEventListener("click", () => {
     chrome.storage.local.remove(["gemini_key"], () => {
-      document.getElementById("api-key-input").value = ""; // Clear input
-      checkApiKeyStatus(); // Refresh UI state
+      document.getElementById("api-key-input").value = "";
+      checkApiKeyStatus();
     });
   });
 });
 
-// New function to toggle UI based on key existence
 function checkApiKeyStatus() {
   const inputContainer = document.getElementById("api-input-container");
   const savedContainer = document.getElementById("api-saved-container");
@@ -148,17 +147,7 @@ async function summarizeHighlight(id, text) {
   };
 
   try {
-    // 1. Try the requested model: Gemini 2.5 Flash
     let response = await callGemini("gemini-2.5-flash");
-
-    // 2. If 404/400 (Model Not Found/Supported), switch to backup (Gemini 1.5 Flash)
-    if (!response.ok && (response.status === 404 || response.status === 400)) {
-      console.log(
-        "Gemini 2.5 Flash not found, switching to Gemini 1.5 Flash fallback..."
-      );
-      response = await callGemini("gemini-1.5-flash");
-    }
-
     const data = await response.json();
 
     if (data.error) {
